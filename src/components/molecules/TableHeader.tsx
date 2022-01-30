@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
+import { LABEL } from '../../common/constants';
 import ColumnName from '../atoms/ColumnName';
 
 const HeaderContainer = styled.div`
@@ -15,16 +16,16 @@ const TableHeader = () => {
   return (
     <HeaderContainer>
       <ColumnNameContainer size={3}>
-        <ColumnName label="Label"></ColumnName>
+        <ColumnName label={LABEL.LABEL}></ColumnName>
       </ColumnNameContainer>
       <ColumnNameContainer size={1}>
-        <ColumnName label="Vision"></ColumnName>
+        <ColumnName label={LABEL.VISION}></ColumnName>
       </ColumnNameContainer>
       <ColumnNameContainer size={1}>
-        <ColumnName label="Ability"></ColumnName>
+        <ColumnName label={LABEL.ABILITY}></ColumnName>
       </ColumnNameContainer>
       <ColumnNameContainer size={1}>
-        <ColumnName label="Delete"></ColumnName>
+        <ColumnName label={LABEL.DELETE}></ColumnName>
       </ColumnNameContainer>
     </HeaderContainer>
   );

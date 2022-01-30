@@ -1,9 +1,12 @@
 import React, { useContext } from 'react';
 import styled from 'styled-components';
-import ItemContext from '../../contexts/ItemContext';
+
 import Button from '../atoms/Button';
 import NumberInput from '../atoms/NumberInput';
 import TextInput from '../atoms/TextInput';
+
+import ItemContext from '../../contexts/ItemContext';
+import { LABEL } from '../../common/constants';
 
 const RowContainer = styled.div`
   display: flex;
@@ -53,7 +56,7 @@ const TableHeader = (props: Props) => {
         <NumberInput value={ability} onUpdate={onAbilityUpdate}></NumberInput>
       </CellContainer>
       <CellContainer size={1}>
-        <Button label={'Delete'} onClick={onDelete}></Button>
+        <Button label={LABEL.DELETE} onClick={onDelete}></Button>
       </CellContainer>
     </RowContainer>
   );

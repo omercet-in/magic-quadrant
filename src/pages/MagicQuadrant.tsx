@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import { BOUNDARY_VALUES, CHART, KEY, LABEL, TABLE } from '../common/constants';
 import { Item } from '../common/model';
+
 import ScatterChart from '../components/organisms/ScatterChart';
 import Table from '../components/organisms/Table';
+
 import ItemContext from '../contexts/ItemContext';
 
 const MainContainer = styled.div`
@@ -15,48 +19,66 @@ const MainContainer = styled.div`
 `;
 
 const TableContainer = styled.div`
-  width: 500px;
-  height: 400px;
+  width: ${TABLE.WIDTH}px;
+  height: ${TABLE.HEIGHT}px;
   margin-left: 20px;
 `;
 
 const ChartContainer = styled.div`
-  width: 400px;
-  height: 400px;
+  width: ${CHART.WIDTH}px;
+  height: ${CHART.HEIGHT}px;
 `;
 
-const mockTable: Item[] = [
+const mockItems: Item[] = [
   {
     index: 0,
-    label: 'Label',
+    label: 'Mock item 0',
     vision: 1,
     ability: 20
   },
   {
     index: 1,
-    label: 'Label1',
+    label: 'Mock item 1',
     vision: 50,
     ability: 30
   },
   {
     index: 2,
-    label: 'Label2',
+    label: 'Mock item 2',
     vision: 40,
     ability: 80
   }
 ];
 
 const MagicQuadrant = () => {
-  const [items, setItems] = useState(mockTable);
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    try {
+      const tempItems = localStorage.getItem(KEY.ITEMS);
+
+      if (tempItems) {
+        setItems(JSON.parse(tempItems));
+      } else {
+        setItems(mockItems);
+      }
+    } catch (e) {
+      setItems(mockItems);
+    }
+  }, []);
+
+  useEffect(() => {
+    localStorage.setItem(KEY.ITEMS, JSON.stringify(items));
+  }, [items]);
 
   const addItem = () => {
     setItems((items) => [
       ...items,
       {
         index: items.length,
-        label: 'new',
-        vision: 50,
-        ability: 50
+        label: LABEL.NEW_ITEM,
+        vision: BOUNDARY_VALUES.MAX / 2,
+        ability: BOUNDARY_VALUES.MAX / 2
       }
     ]);
   };

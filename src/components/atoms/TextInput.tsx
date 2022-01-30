@@ -1,5 +1,6 @@
 import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
+
 import { color } from '../../common/color';
 
 const StyledInput = styled.input`

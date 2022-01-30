@@ -1,6 +1,9 @@
 import React, { SyntheticEvent } from 'react';
 import styled from 'styled-components';
+
 import { color } from '../../common/color';
+import { BOUNDARY_VALUES } from '../../common/constants';
+import { stayInBoundries } from '../../common/utils';
 
 const StyledInput = styled.input`
   height: 20px;
@@ -21,12 +24,18 @@ const NumberInput = (props: Props) => {
 
   const onChange = (e: SyntheticEvent) => {
     const target = e.target as HTMLInputElement;
-    const value = parseInt(target.value, 10);
+    const value = stayInBoundries(parseInt(target.value, 10));
+
     onUpdate(value);
   };
 
   return (
-    <StyledInput type="number" min="0" max="100" value={value} onChange={onChange}></StyledInput>
+    <StyledInput
+      type="number"
+      min={BOUNDARY_VALUES.MIN}
+      max={BOUNDARY_VALUES.MAX}
+      value={value}
+      onChange={onChange}></StyledInput>
   );
 };
 
