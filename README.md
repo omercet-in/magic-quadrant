@@ -1,6 +1,6 @@
 ## Magic Quadrant 
 
-An application to used to demonstrate Gartner's Magic Quadrant built with React, Context API, d3.js and styled-components. 
+An application used to demonstrate Gartner's Magic Quadrant built with React, Context API, d3.js and styled-components. 
 
 ## Project Demo
 
