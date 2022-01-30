@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
+import nextId from 'react-id-generator';
 
 import { BOUNDARY_VALUES, CHART, KEY, LABEL, TABLE } from '../common/constants';
 import { Item } from '../common/model';
@@ -31,19 +32,19 @@ const ChartContainer = styled.div`
 
 const mockItems: Item[] = [
   {
-    index: 0,
+    id: nextId(),
     label: 'Mock item 0',
     vision: 1,
     ability: 20
   },
   {
-    index: 1,
+    id: nextId(),
     label: 'Mock item 1',
     vision: 50,
     ability: 30
   },
   {
-    index: 2,
+    id: nextId(),
     label: 'Mock item 2',
     vision: 40,
     ability: 80
@@ -51,11 +52,13 @@ const mockItems: Item[] = [
 ];
 
 const MagicQuadrant = () => {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState(mockItems);
 
   useEffect(() => {
     try {
       const tempItems = localStorage.getItem(KEY.ITEMS);
+
+      console.log(tempItems);
 
       if (tempItems) {
         setItems(JSON.parse(tempItems));
@@ -75,7 +78,7 @@ const MagicQuadrant = () => {
     setItems((items) => [
       ...items,
       {
-        index: items.length,
+        id: nextId(),
         label: LABEL.NEW_ITEM,
         vision: BOUNDARY_VALUES.MAX / 2,
         ability: BOUNDARY_VALUES.MAX / 2
@@ -83,20 +86,20 @@ const MagicQuadrant = () => {
     ]);
   };
 
-  const deleteItem = (index: number) => {
-    setItems((items) => items.filter((item, i) => i !== index));
+  const deleteItem = (id: string) => {
+    setItems((items) => items.filter((item) => item.id !== id));
   };
 
-  const updateLabel = (index: number, label: string) => {
-    setItems((items) => items.map((item, i) => (i === index ? { ...item, label } : item)));
+  const updateLabel = (id: string, label: string) => {
+    setItems((items) => items.map((item) => (item.id === id ? { ...item, label } : item)));
   };
 
-  const updateVision = (index: number, vision: number) => {
-    setItems((items) => items.map((item, i) => (i === index ? { ...item, vision } : item)));
+  const updateVision = (id: string, vision: number) => {
+    setItems((items) => items.map((item) => (item.id === id ? { ...item, vision } : item)));
   };
 
-  const updateAbility = (index: number, ability: number) => {
-    setItems((items) => items.map((item, i) => (i === index ? { ...item, ability } : item)));
+  const updateAbility = (id: string, ability: number) => {
+    setItems((items) => items.map((item) => (item.id === id ? { ...item, ability } : item)));
   };
 
   return (

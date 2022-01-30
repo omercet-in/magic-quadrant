@@ -147,15 +147,16 @@ const ScatterChart = () => {
 
     const svg = d3.select('svg');
 
-    const dots = svg.selectAll('.dot').data(items, (d: Item) => d.index);
-    const labels = svg.selectAll('.label').data(items, (d: Item) => 'label' + d.index);
-    const circles = svg.selectAll('.circle').data(items, (d: Item) => 'circle' + d.index);
+    const dots = svg.selectAll('.dot').data(items, (d: Item) => 'dot-' + d.id);
+    const labels = svg.selectAll('.label').data(items, (d: Item) => 'label-' + d.id);
+    const circles = svg.selectAll('.circle').data(items, (d: Item) => 'circle-' + d.id);
 
     if (items.length !== itemsLength) {
       const tempDots = dots
         .enter()
         .append('circle')
         .attr('class', 'dot')
+        .attr('id', (d) => 'dot' + d.id)
         .attr('cx', (d) => x(d.vision))
         .attr('cy', (d) => y(d.ability))
         .attr('r', 0);
@@ -186,7 +187,7 @@ const ScatterChart = () => {
         .enter()
         .append('circle')
         .attr('class', 'circle')
-        .attr('id', (d) => 'circle' + d.index)
+        .attr('id', (d) => 'circle' + d.id)
         .attr('cx', (d) => x(d.vision))
         .attr('cy', (d) => y(d.ability))
         .attr('r', 25)
@@ -222,17 +223,19 @@ const ScatterChart = () => {
     .range([BOUNDARY_VALUES.MAX, BOUNDARY_VALUES.MIN]);
 
   const startDrag = (event) => {
-    const dot = d3.select(this);
-    const circle = d3.select('#circle' + event.subject.index);
+    const dot = d3.select('#dot' + event.subject.id);
+    const circle = d3.select('#circle' + event.subject.id);
 
     const onDrag = (event, d) => {
+      console.log(event.subject.id);
+
       circle.attr('visibility', 'visible');
 
       const vision = stayInBoundries(Number(getVision(event.x).toFixed(2)));
       const ability = stayInBoundries(Number(getAbility(event.y).toFixed(2)));
 
-      updateVision(event.subject.index, vision);
-      updateAbility(event.subject.index, ability);
+      updateVision(event.subject.id, vision);
+      updateAbility(event.subject.id, ability);
 
       dot
         .raise()

@@ -18,30 +18,30 @@ const CellContainer = styled.div<{ size: number }>`
 `;
 
 interface Props {
-  index: number;
+  id: string;
   label: string;
   vision: number;
   ability: number;
 }
 
 const TableHeader = (props: Props) => {
-  const { index, label, vision, ability } = props;
+  const { id, label, vision, ability } = props;
   const { deleteItem, updateLabel, updateVision, updateAbility } = useContext(ItemContext);
 
   const onDelete = () => {
-    deleteItem(index);
+    deleteItem(id);
   };
 
   const onLabelUpdate = (value: string) => {
-    updateLabel(index, value);
+    updateLabel(id, value);
   };
 
   const onVisionUpdate = (value: number) => {
-    updateVision(index, value);
+    updateVision(id, value);
   };
 
   const onAbilityUpdate = (value: number) => {
-    updateAbility(index, value);
+    updateAbility(id, value);
   };
 
   return (

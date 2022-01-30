@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { Item } from '../../common/model';
@@ -16,16 +16,20 @@ const AddButtonContainer = styled.div`
 const Table = () => {
   const { items, addItem } = useContext(ItemContext);
 
+  useEffect(() => {
+    console.log(items);
+  }, [items]);
+
   return (
     <div>
       <AddButtonContainer>
         <Button label="Add" onClick={addItem} />
       </AddButtonContainer>
       <TableHeader />
-      {items.map((item: Item, index: number) => (
+      {items.map((item: Item) => (
         <TableRow
-          key={index}
-          index={index}
+          key={item.id}
+          id={item.id}
           label={item.label}
           vision={item.vision}
           ability={item.ability}
