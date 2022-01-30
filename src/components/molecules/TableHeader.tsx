@@ -14,7 +14,7 @@ const ColumnNameContainer = styled.div<{ size: number }>`
 const TableHeader = () => {
   return (
     <HeaderContainer>
-      <ColumnNameContainer size={2}>
+      <ColumnNameContainer size={3}>
         <ColumnName label="Label"></ColumnName>
       </ColumnNameContainer>
       <ColumnNameContainer size={1}>

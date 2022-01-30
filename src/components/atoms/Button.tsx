@@ -8,7 +8,7 @@ const StyledButton = styled.button`
   border-radius: 4px;
   border: 2px solid ${color.LIGHT_GREY};
   cursor: pointer;
-  margin: 1px;
+  margin: 2px;
 `;
 
 interface Props {

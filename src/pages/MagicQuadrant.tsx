@@ -1,6 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
+import { Item } from '../common/model';
+import ScatterChart from '../components/organisms/ScatterChart';
 import Table from '../components/organisms/Table';
+import ItemContext from '../contexts/ItemContext';
 
 const MainContainer = styled.div`
   display: flex;
@@ -12,51 +15,80 @@ const MainContainer = styled.div`
 `;
 
 const TableContainer = styled.div`
-  width: 400px;
+  width: 500px;
   height: 400px;
+  margin-left: 20px;
 `;
 
 const ChartContainer = styled.div`
   width: 400px;
   height: 400px;
-  background-color: red;
 `;
 
-const mockTable = [
+const mockTable: Item[] = [
   {
+    index: 0,
     label: 'Label',
     vision: 1,
-    ability: 2,
-    onDelete: () => {
-      console.log('delete');
-    }
+    ability: 20
   },
   {
+    index: 1,
     label: 'Label1',
-    vision: 1,
-    ability: 2,
-    onDelete: () => {
-      console.log('delete');
-    }
+    vision: 50,
+    ability: 30
   },
   {
+    index: 2,
     label: 'Label2',
-    vision: 1,
-    ability: 2,
-    onDelete: () => {
-      console.log(mockTable);
-    }
+    vision: 40,
+    ability: 80
   }
 ];
 
 const MagicQuadrant = () => {
+  const [items, setItems] = useState(mockTable);
+
+  const addItem = () => {
+    setItems([
+      ...items,
+      {
+        index: items.length,
+        label: 'new',
+        vision: 50,
+        ability: 50
+      }
+    ]);
+  };
+
+  const deleteItem = (index: number) => {
+    setItems(items.filter((item, i) => i !== index));
+  };
+
+  const updateLabel = (index: number, label: string) => {
+    setItems(items.map((item, i) => (i === index ? { ...item, label } : item)));
+  };
+
+  const updateVision = (index: number, vision: number) => {
+    setItems(items.map((item, i) => (i === index ? { ...item, vision } : item)));
+  };
+
+  const updateAbility = (index: number, ability: number) => {
+    setItems(items.map((item, i) => (i === index ? { ...item, ability } : item)));
+  };
+
   return (
-    <MainContainer>
-      <ChartContainer />
-      <TableContainer>
-        <Table rows={mockTable} />
-      </TableContainer>
-    </MainContainer>
+    <ItemContext.Provider
+      value={{ items, addItem, deleteItem, updateLabel, updateVision, updateAbility }}>
+      <MainContainer>
+        <ChartContainer>
+          <ScatterChart />
+        </ChartContainer>
+        <TableContainer>
+          <Table />
+        </TableContainer>
+      </MainContainer>
+    </ItemContext.Provider>
   );
 };
 

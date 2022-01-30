@@ -4,7 +4,6 @@ import { color } from '../../common/color';
 
 const StyledDiv = styled.div`
   height: 20px;
-  width: 100%;
   border-radius: 4px;
   background-color: ${color.LIGHT_BLUE};
   font-size: 12px;
@@ -13,15 +12,16 @@ const StyledDiv = styled.div`
   align-items: center;
   justify-content: center;
   margin: 2px;
+  padding: 0 10px;
 `;
 
 interface Props {
   label: string;
 }
 
-const ColumnName = (props: Props) => {
+const AreaLabel = (props: Props) => {
   const { label } = props;
   return <StyledDiv>{label}</StyledDiv>;
 };
 
-export default ColumnName;
+export default AreaLabel;
