@@ -1,11 +1,24 @@
+## Magic Quadrant 
+
+An application to used to demonstrate Gartner's Magic Quadrant built with React, Context API, d3.js and styled-components. 
+
 ## Project Demo
 
 You can access the demo of the project by clicking [here](https://magic-quadrantt.web.app/).
-## Available Scripts
 
-In the project directory, you can run:
+## Installation and Setup Instructions
 
-### `npm start`
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Installation:
+
+`npm install`  
+
+To Start Server:
+
+`npm start`  
+
+To Visit App:
+
+`http://localhost:3000/`  
+
