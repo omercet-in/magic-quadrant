@@ -50,7 +50,7 @@ const MagicQuadrant = () => {
   const [items, setItems] = useState(mockTable);
 
   const addItem = () => {
-    setItems([
+    setItems((items) => [
       ...items,
       {
         index: items.length,
@@ -62,19 +62,19 @@ const MagicQuadrant = () => {
   };
 
   const deleteItem = (index: number) => {
-    setItems(items.filter((item, i) => i !== index));
+    setItems((items) => items.filter((item, i) => i !== index));
   };
 
   const updateLabel = (index: number, label: string) => {
-    setItems(items.map((item, i) => (i === index ? { ...item, label } : item)));
+    setItems((items) => items.map((item, i) => (i === index ? { ...item, label } : item)));
   };
 
   const updateVision = (index: number, vision: number) => {
-    setItems(items.map((item, i) => (i === index ? { ...item, vision } : item)));
+    setItems((items) => items.map((item, i) => (i === index ? { ...item, vision } : item)));
   };
 
   const updateAbility = (index: number, ability: number) => {
-    setItems(items.map((item, i) => (i === index ? { ...item, ability } : item)));
+    setItems((items) => items.map((item, i) => (i === index ? { ...item, ability } : item)));
   };
 
   return (

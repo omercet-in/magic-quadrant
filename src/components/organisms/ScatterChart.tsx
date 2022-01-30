@@ -57,10 +57,32 @@ const AreaLabelContainerBottom = styled.div`
 `;
 
 const ScatterChart = () => {
-  const { items } = useContext(ItemContext);
+  const { items, updateVision, updateAbility } = useContext(ItemContext);
   const chartEl = useRef(null);
 
   const [itemsLength, setItemsLength] = useState(0);
+
+  const x1 = d3.scaleLinear().domain([0, 400]).range([0, 100]);
+  const y2 = d3.scaleLinear().domain([0, 400]).range([100, 0]);
+
+  function started(event) {
+    const circle = d3.select(this).classed('dragging', true);
+
+    event.on('drag', dragged).on('end', ended);
+
+    function dragged(event, d) {
+      updateVision(event.subject.index, x1(event.x));
+      updateAbility(event.subject.index, y2(event.y));
+      circle
+        .raise()
+        .attr('cx', (d.x = event.x))
+        .attr('cy', (d.y = event.y));
+    }
+
+    function ended() {
+      circle.classed('dragging', false);
+    }
+  }
 
   useEffect(() => {
     const svg = d3.select(chartEl.current).append('svg').attr('width', 400).attr('height', 400);
@@ -127,14 +149,13 @@ const ScatterChart = () => {
   }, []);
 
   useEffect(() => {
-    console.log('items', items);
     const x = d3.scaleLinear().domain([0, 100]).range([0, 400]);
     const y = d3.scaleLinear().domain([0, 100]).range([400, 0]);
 
     const svg = d3.select('svg');
 
     const dots = svg.selectAll('.dot').data(items, (d: Item) => d.index);
-    const labels = svg.selectAll('.label').data(items, (d: Item) => d.index);
+    const labels = svg.selectAll('.label').data(items, (d: Item) => 'label' + d.index);
 
     if (items.length !== itemsLength) {
       const tempDots = dots
@@ -146,9 +167,7 @@ const ScatterChart = () => {
         .attr('r', 0);
 
       tempDots.transition().duration(1000).attr('r', 7).attr('fill', color.DARK_BLUE);
-      tempDots.on('mouseover', () => {
-        d3.select(this).style('cursor', 'move');
-      });
+      tempDots.call(d3.drag().on('start', started));
 
       labels
         .enter()
@@ -168,16 +187,12 @@ const ScatterChart = () => {
       setItemsLength(items.length);
     } else {
       dots
-        .transition()
-        .duration(1000)
         .attr('cx', (d) => x(d.vision))
         .attr('cy', (d) => y(d.ability))
         .attr('r', 7)
         .attr('fill', color.DARK_BLUE);
 
       labels
-        .transition()
-        .duration(1000)
         .attr('x', (d) => x(d.vision))
         .attr('y', (d) => y(d.ability))
         .attr('dx', '10px')

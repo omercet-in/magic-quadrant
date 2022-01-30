@@ -2,7 +2,6 @@ import React, { useContext } from 'react';
 import styled from 'styled-components';
 import ItemContext from '../../contexts/ItemContext';
 import Button from '../atoms/Button';
-import ColumnName from '../atoms/ColumnName';
 import NumberInput from '../atoms/NumberInput';
 import TextInput from '../atoms/TextInput';
 

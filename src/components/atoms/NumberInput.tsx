@@ -26,12 +26,7 @@ const NumberInput = (props: Props) => {
   };
 
   return (
-    <StyledInput
-      type="number"
-      min="0"
-      max="100"
-      defaultValue={value}
-      onChange={onChange}></StyledInput>
+    <StyledInput type="number" min="0" max="100" value={value} onChange={onChange}></StyledInput>
   );
 };
 
