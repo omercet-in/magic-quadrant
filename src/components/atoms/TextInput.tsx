@@ -10,6 +10,7 @@ const StyledInput = styled.input`
   background-color: ${color.WHITE};
   border: 2px solid ${color.LIGHT_GREY};
   margin: 2px;
+  padding-left: 8px;
 `;
 
 interface Props {
