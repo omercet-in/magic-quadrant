@@ -16,10 +16,6 @@ const AddButtonContainer = styled.div`
 const Table = () => {
   const { items, addItem } = useContext(ItemContext);
 
-  useEffect(() => {
-    console.log(items);
-  }, [items]);
-
   return (
     <div>
       <AddButtonContainer>

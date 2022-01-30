@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import nextId from 'react-id-generator';
+import { nanoid } from 'nanoid';
 
 import { BOUNDARY_VALUES, CHART, KEY, LABEL, TABLE } from '../common/constants';
 import { Item } from '../common/model';
@@ -32,19 +32,19 @@ const ChartContainer = styled.div`
 
 const mockItems: Item[] = [
   {
-    id: nextId(),
+    id: nanoid(),
     label: 'Mock item 0',
     vision: 1,
     ability: 20
   },
   {
-    id: nextId(),
+    id: nanoid(),
     label: 'Mock item 1',
     vision: 50,
     ability: 30
   },
   {
-    id: nextId(),
+    id: nanoid(),
     label: 'Mock item 2',
     vision: 40,
     ability: 80
@@ -52,13 +52,11 @@ const mockItems: Item[] = [
 ];
 
 const MagicQuadrant = () => {
-  const [items, setItems] = useState(mockItems);
+  const [items, setItems] = useState([]);
 
   useEffect(() => {
     try {
       const tempItems = localStorage.getItem(KEY.ITEMS);
-
-      console.log(tempItems);
 
       if (tempItems) {
         setItems(JSON.parse(tempItems));
@@ -78,7 +76,7 @@ const MagicQuadrant = () => {
     setItems((items) => [
       ...items,
       {
-        id: nextId(),
+        id: nanoid(),
         label: LABEL.NEW_ITEM,
         vision: BOUNDARY_VALUES.MAX / 2,
         ability: BOUNDARY_VALUES.MAX / 2

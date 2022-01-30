@@ -227,8 +227,6 @@ const ScatterChart = () => {
     const circle = d3.select('#circle' + event.subject.id);
 
     const onDrag = (event, d) => {
-      console.log(event.subject.id);
-
       circle.attr('visibility', 'visible');
 
       const vision = stayInBoundries(Number(getVision(event.x).toFixed(2)));
