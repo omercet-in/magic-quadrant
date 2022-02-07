@@ -161,7 +161,11 @@ const ScatterChart = () => {
         .attr('cy', (d) => y(d.ability))
         .attr('r', 0);
 
-      tempDots.transition().duration(1000).attr('r', 7).attr('fill', color.DARK_BLUE);
+      tempDots
+        .transition()
+        .duration(1000)
+        .attr('r', 7)
+        .attr('fill', (d) => (d.checked ? color.DARK_BLUE : color.LIGHT_GREY));
       tempDots.call(d3.drag().on('start', startDrag));
       tempDots
         .on('mouseover', () => {
@@ -180,7 +184,7 @@ const ScatterChart = () => {
         .attr('dx', '10px')
         .attr('dy', '15px')
         .attr('font-size', '12px')
-        .attr('fill', color.DARK_BLUE)
+        .attr('fill', (d) => (d.checked ? color.DARK_BLUE : color.LIGHT_GREY))
         .text((d) => d.label);
 
       circles
@@ -201,11 +205,15 @@ const ScatterChart = () => {
 
       setItemsLength(items.length);
     } else {
-      dots.attr('cx', (d) => x(d.vision)).attr('cy', (d) => y(d.ability));
+      dots
+        .attr('cx', (d) => x(d.vision))
+        .attr('cy', (d) => y(d.ability))
+        .attr('fill', (d) => (d.checked ? color.DARK_BLUE : color.LIGHT_GREY));
 
       labels
         .attr('x', (d) => x(d.vision))
         .attr('y', (d) => y(d.ability))
+        .attr('fill', (d) => (d.checked ? color.DARK_BLUE : color.LIGHT_GREY))
         .text((d) => d.label);
 
       circles.attr('cx', (d) => x(d.vision)).attr('cy', (d) => y(d.ability));

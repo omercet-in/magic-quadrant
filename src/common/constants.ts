@@ -25,7 +25,8 @@ export const LABEL = {
   VISIONARIES: 'Visionaries',
   ABILITY_TO_EXECUTE: 'Ability to execute →',
   COMPLETENESS_OF_VISION: 'Completeness of vision →',
-  NEW_ITEM: 'New item'
+  NEW_ITEM: 'New item',
+  CHECKBOX: ' '
 };
 
 export const KEY = {

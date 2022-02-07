@@ -35,19 +35,22 @@ const mockItems: Item[] = [
     id: nanoid(),
     label: 'Mock item 0',
     vision: 1,
-    ability: 20
+    ability: 20,
+    checked: false
   },
   {
     id: nanoid(),
     label: 'Mock item 1',
     vision: 50,
-    ability: 30
+    ability: 30,
+    checked: false
   },
   {
     id: nanoid(),
     label: 'Mock item 2',
     vision: 40,
-    ability: 80
+    ability: 80,
+    checked: false
   }
 ];
 
@@ -100,9 +103,21 @@ const MagicQuadrant = () => {
     setItems((items) => items.map((item) => (item.id === id ? { ...item, ability } : item)));
   };
 
+  const updateCheckbox = (id: string, checked: boolean) => {
+    setItems((items) => items.map((item) => (item.id === id ? { ...item, checked } : item)));
+  };
+
   return (
     <ItemContext.Provider
-      value={{ items, addItem, deleteItem, updateLabel, updateVision, updateAbility }}>
+      value={{
+        items,
+        addItem,
+        deleteItem,
+        updateLabel,
+        updateVision,
+        updateAbility,
+        updateCheckbox
+      }}>
       <MainContainer>
         <ChartContainer>
           <ScatterChart />

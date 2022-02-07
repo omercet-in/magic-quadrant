@@ -7,6 +7,7 @@ import TextInput from '../atoms/TextInput';
 
 import ItemContext from '../../contexts/ItemContext';
 import { LABEL } from '../../common/constants';
+import Checkbox from '../atoms/Checkbox';
 
 const RowContainer = styled.div`
   display: flex;
@@ -15,6 +16,8 @@ const RowContainer = styled.div`
 const CellContainer = styled.div<{ size: number }>`
   display: flex;
   flex: ${(props) => props.size};
+  justify-content: center;
+  align-items: center;
 `;
 
 interface Props {
@@ -22,11 +25,13 @@ interface Props {
   label: string;
   vision: number;
   ability: number;
+  checked: boolean;
 }
 
 const TableHeader = (props: Props) => {
-  const { id, label, vision, ability } = props;
-  const { deleteItem, updateLabel, updateVision, updateAbility } = useContext(ItemContext);
+  const { id, label, vision, ability, checked } = props;
+  const { deleteItem, updateLabel, updateVision, updateAbility, updateCheckbox } =
+    useContext(ItemContext);
 
   const onDelete = () => {
     deleteItem(id);
@@ -44,8 +49,15 @@ const TableHeader = (props: Props) => {
     updateAbility(id, value);
   };
 
+  const onCheckboxUpdate = (value: boolean) => {
+    updateCheckbox(id, value);
+  };
+
   return (
     <RowContainer>
+      <CellContainer size={0.3}>
+        <Checkbox value={checked} onUpdate={onCheckboxUpdate} />
+      </CellContainer>
       <CellContainer size={3}>
         <TextInput value={label} onUpdate={onLabelUpdate}></TextInput>
       </CellContainer>

@@ -9,7 +9,8 @@ const defaultValue: ItemContextProps = {
   deleteItem: () => {},
   updateLabel: () => {},
   updateVision: () => {},
-  updateAbility: () => {}
+  updateAbility: () => {},
+  updateCheckbox: () => {}
 };
 
 const ItemContext = createContext<ItemContextProps>(defaultValue);

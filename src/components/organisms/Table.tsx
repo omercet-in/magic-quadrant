@@ -29,6 +29,7 @@ const Table = () => {
           label={item.label}
           vision={item.vision}
           ability={item.ability}
+          checked={item.checked}
         />
       ))}
     </div>
